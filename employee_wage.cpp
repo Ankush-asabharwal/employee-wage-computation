@@ -2,32 +2,52 @@
 
 using namespace std;
 
-void wageCalc(int wagePerHr,int randN){
+int emplIs(int wagePerHr){
+    int randN = rand()%3;
     switch(randN){
         case 0 :
-            cout << "Total wage for full-time employee is : ";
-            cout << 8 * wagePerHr;
+            return 0;
             break;
         case 1 :
-            cout << "Total wage for part-time employee is : ";
-            cout << 4 * wagePerHr;
+            return 8 * wagePerHr;
             break;
+        case 2 : 
+            return 4 * wagePerHr;
+            break;
+        default:
+            return 0; 
     }
+}
+
+bool present(){
+    int randN = rand()%2;
+    if(randN==0){
+        return true;
+    }else{
+        return false;
+    }
+}
+
+int calMonthlyWage(int workingDayInMonth){
+    int wagePerHr =20;
+    int total = 0;
+    for(int i=0;i<workingDayInMonth;i++){
+        if(present()){
+            int dailyWage = emplIs(wagePerHr);
+            total += dailyWage;
+        }else{
+            total = total +0;
+        }
+    }
+    
+    return total;
 }
 
 int main(){
     srand(time(0));
     cout << "Welcome to Employee wage computation"<<endl;
-    int wagePerHr =20;
-    int randomNum = rand()%2;
-    switch(randomNum){
-        case 0 :
-            cout << "Employee is not present" << endl;
-            break;
-        case 1 :
-            cout << "Employee is present" << endl;
-            int randN = rand()%2;
-            wageCalc(wagePerHr, randN);
-            break;
-    }
+    int workingDayInMonth =20;
+    int totalWage = calMonthlyWage(workingDayInMonth);
+    cout << "Total wage of month is : " << totalWage;
+
 }
