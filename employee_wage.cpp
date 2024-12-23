@@ -7,6 +7,10 @@ void wageCalc(int wagePerHr,int randN){
         cout << "Total wage for full-time employee is : ";
         cout << 8 * wagePerHr;
     }
+    else{
+        cout << "Total wage for part-time employee is : ";
+        cout << 4 * wagePerHr;
+    }
 }
 
 int main(){
