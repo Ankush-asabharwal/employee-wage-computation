@@ -2,6 +2,8 @@
 
 using namespace std;
 
+int wagePerHr =20;
+
 int emplIs(int wagePerHr){
     int randN = rand()%3;
     switch(randN){
@@ -28,26 +30,37 @@ bool present(){
     }
 }
 
-int calMonthlyWage(int workingDayInMonth){
-    int wagePerHr =20;
-    int total = 0;
-    for(int i=0;i<workingDayInMonth;i++){
+int cond(int dailyhrs, int &days){
+    int total=0;
+    while(dailyhrs<100 && days<20){
         if(present()){
-            int dailyWage = emplIs(wagePerHr);
-            total += dailyWage;
-        }else{
-            total = total +0;
+            int wage = emplIs(wagePerHr);
+            if(wage==160){
+                dailyhrs += 8;
+                cout << "full-time" << endl;
+            }
+            else if(wage == 80){
+                dailyhrs += 4;
+                cout << "part-time" << endl;
+            }else{
+                dailyhrs += 0;
+                cout << "No work" << endl;
+            }
+            total += wage;
+            days++;
         }
     }
-    
+    cout << "Hours completed by employee : " << dailyhrs << endl;
+    cout << "Days he was present : " << days << endl;
     return total;
 }
 
 int main(){
     srand(time(0));
     cout << "Welcome to Employee wage computation"<<endl;
-    int workingDayInMonth =20;
-    int totalWage = calMonthlyWage(workingDayInMonth);
+    int workingDayInMonth =0;
+    int dailyhrs=0;
+    int totalWage = cond(dailyhrs, workingDayInMonth);
     cout << "Total wage of month is : " << totalWage;
 
 }
